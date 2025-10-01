@@ -1,0 +1,458 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+
+.publication-authors {
+  /* color placeholder: adjust as desired */
+  color: inherit;
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+/* PDF-as-image preview utility
+   Use .pdf-image on a container with data-pdf="/path/to/file.pdf"
+   JavaScript (PDF.js) will render the first page into a canvas.
+*/
+.pdf-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  display: block;
+}
+.pdf-image canvas {
+  width: 100% !important; /* responsive */
+  height: auto !important;
+  display: block;
+}
+.pdf-image .pdf-fallback {
+  padding: 16px;
+  text-align: center;
+  color: #333;
+}
+
+/* Teaser image styling (no border) */
+.teaser-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: none;
+  display: block;
+}
+
+/* Results panel figure styling: center images and captions, make responsive */
+.results-panel figure {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.results-panel figure img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.results-panel figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Ensure each results column centers its contents reliably */
+.results-panel .column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-panel .column figure {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results-panel .column figure img {
+  max-width: 90%;
+}
+
+/* Force consistent visual heights: set a target figure height and let width scale */
+.results-panel .column figure,
+.results-panel .column figure img {
+  height: 280px; /* target visual height for desktop */
+}
+.results-panel .column figure img {
+  width: auto; /* preserve aspect ratio */
+  max-width: none; /* allow width to grow proportionally */
+  display: block;
+}
+
+/* Thin divider for section separation (more visible) */
+.thin-divider {
+  display: block;
+  border: none;
+  height: 2px;                  /* slightly thicker so it's visible */
+  background-color: #e0e0e0;    /* gray for contrast */
+  margin: 1rem auto;            /* vertical spacing and center horizontally */
+  width: 100%;                  /* responsive fill up to max-width */
+  max-width: 1100px;            /* align with .figure-panel content width */
+  opacity: 0.95;
+}
+
+@media (max-width: 1024px) {
+  .results-panel .column figure,
+  .results-panel .column figure img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-panel .column figure,
+  .results-panel .column figure img {
+    height: 180px;
+  }
+}
+
+/* Custom figure-panel: group multiple figures and center the group */
+.figure-panel {
+  display: flex;
+  flex-direction: column; /* stack results then legend */
+  align-items: center; /* center the group horizontally */
+  width: 100%;
+  margin-bottom: 1rem;
+  padding-top: 2.5rem; /* more space above the figure group */
+  padding-bottom: 2.5rem; /* more space below the figure group */
+}
+
+.figure-panel .results-panel {
+  max-width: 1100px; /* limit group width so multiple figures stay centered */
+  width: 100%;
+  display: flex; /* center the columns as a group */
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.figure-panel .results-panel .column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* prefer two-equal columns for paired figures */
+  flex: 0 0 calc(50% - 2rem);
+  max-width: calc(50% - 2rem);
+}
+
+.figure-panel .results-panel .column figure img {
+  height: 300px; /* consistent visual height for grouped figures */
+  width: auto;
+}
+
+@media (max-width: 1024px) {
+  .figure-panel .results-panel .column figure img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .figure-panel .results-panel .column figure img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .figure-panel {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Legend image and panel caption styling */
+.figure-panel .legend,
+.legend {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.legend figure img {
+  /* ~1.5x larger than the original 320px visual: responsive */
+  width: 70%;
+  max-width: 480px;
+  height: auto;
+  display: inline-block;
+}
+
+.panel-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Teaser-specific layout: cap width, center, and add vertical spacing */
+.teaser-wrapper {
+  margin-top: 1.5rem; /* space after abstract */
+  margin-bottom: 1.5rem; /* space before following content */
+}
+
+.teaser .teaser-image {
+  width: 85%;      /* not too wide */
+  max-width: 920px; /* hard cap for large screens */
+  height: auto;    /* preserve native aspect ratio */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .teaser .teaser-image {
+    width: 100%; /* full-width on small screens */
+  }
+}
+
+/* Video captions beneath each side-video */
+.video-caption {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Separate caption bar below the videos (keeps caption area distinct from the gray video band) */
+/* caption bar removed - restoring original sizing */
+
+/* Two-video side-by-side panel */
+.video-panel {
+  /* slightly taller band so the neutral background fully encompasses videos */
+  --video-max-height: 360px;
+}
+
+.video-panel {
+  padding-top: 1rem;    /* keep a little breathing room above videos */
+  padding-bottom: 0.25rem; /* reduce space below videos so captions sit closer */
+}
+
+.video-panel .columns {
+  gap: 6px; /* small gap between columns so videos sit closer */
+  align-items: stretch; /* make columns equal height */
+  max-height: calc(var(--video-max-height) + 16px); /* allow for vertical padding */
+  padding-top: 8px;
+  padding-bottom: 4px; /* tighten bottom padding */
+  margin-bottom: 0;     /* remove extra bottom margin from columns */
+}
+
+.video-panel .column {
+  padding: 4px 2px; /* very small horizontal gutters and a bit of vertical padding */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* center video vertically */
+  background: #f5f5f5; /* neutral background for letterboxing */
+}
+
+.video-panel .side-video {
+  max-height: var(--video-max-height);
+  width: 100%; /* fill column width to minimize horizontal gaps */
+  height: auto; /* preserve aspect ratio */
+  object-fit: contain; /* show full video without cropping */
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-panel {
+    --video-max-height: 220px;
+  }
+  .video-panel .side-video {
+    max-height: var(--video-max-height);
+  }
+}
+
+/* Per-video caption panel (matches video columns, doesn't affect video-panel sizing) */
+.video-caption-panel {
+  background: #fff;
+  padding-top: 0.25rem; /* small gap so text doesn't touch videos */
+  padding-bottom: 0.5rem;
+  margin-top: 0px; /* bring caption panel closer to videos */
+}
+.video-caption-panel-item {
+  font-size: 0.95rem; /* reduced caption size for subtle appearance */
+  color: #666666;
+  text-align: center;
+  padding-top: 0.15rem;
+  padding-bottom: 0.0rem;
+  line-height: 1;
+  font-style: italic;
+}
+
+/* Make per-video captions italic and gray for a subtle, figure-like appearance */
+.video-caption-panel-item {
+  color: #666666; /* medium gray */
+  font-style: italic;
+}
+
+/* Problem statement block inserted above video band */
+.problem-statement {
+  text-align: center;
+  font-style: italic;
+  color: #222222;
+  margin-bottom: 0.5rem; /* small gap before videos */
+  font-size: 1.35rem; /* larger so the problem statement stands out */
+  font-weight: 400; /* keep normal weight; emphasize only the target phrase */
+}
+
+/* Emphasize the key phrase within the problem statement */
+.problem-emphasis {
+  font-weight: 600;
+  color: #111111;
+}
+
+.video-caption-panel .columns {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Training readiness wrapper: add controlled vertical padding after the block */
+.training-readiness-block {
+  padding-bottom: 3.5rem; /* space after the block before the next subsection */
+}
+
+@media (max-width: 768px) {
+  .training-readiness-block {
+    padding-bottom: 2rem;
+  }
+}

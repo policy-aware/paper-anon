@@ -1,43 +1,373 @@
-<!doctype html>
-<html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Paper Title (Anonymous)</title>
-<style>
-  body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:40px;max-width:750px}
-  header{margin-bottom:1.5rem}
-  h1{font-size:1.6rem;margin:0 0 .25rem}
-  .muted{color:#666}
-  a{word-break:break-all}
-  .card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:12px 0}
-</style>
-<header>
-  <h1>Paper Title (Anonymous)</h1>
-  <div class="muted">Anonymous authors · Under review</div>
-</header>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Policy-gradient ESNR predicts downstream policy performance, giving a practical diagnostic for “policy-aware” world models and guiding pretraining, architecture tweaks, and policy choice.">
+  <meta name="keywords" content="World Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Towards Policy-Aware World Models</title>
 
-<main>
-  <div class="card">
-    <h2>Abstract</h2>
-    <p>Short abstract or teaser text goes here. Keep it identity-neutral.</p>
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <!-- Navigation links removed for anonymized submission -->
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Towards Policy-Aware World Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Paper Authors Anonymized for Submission</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Paper (PDF) -->
+              <span class="link-block">
+                <a href="./static/supp/2644_Towards_Policy_Aware_World_Models.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/policy-aware/world_model_metrics"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Problem statement: short italicized prompt about what we aim to predict -->
+<div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-three-quarters">
+  <div class="problem-statement">How can we predict the downstream performance of a policy extracted from a world model, <span class="problem-emphasis">without actually training the policy?</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="section video-panel">
+  <div class="container is-max-desktop">
+    <div class="columns is-vcentered is-variable is-1">
+      <div class="column is-one-third">
+        <video class="side-video" autoplay muted loop playsinline>
+          <source src="./static/videos/gtplan9r3m_vs_gt_0_failure_cropped.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-third">
+        <video class="side-video" autoplay muted loop playsinline>
+          <source src="./static/videos/gtplan2resnet_vs_gt_0_failure_cropped.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-third">
+        <video class="side-video" autoplay muted loop playsinline>
+          <source src="./static/videos/goal_video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Per-video caption panel (separate from video-panel) -->
+<section class="section video-caption-panel">
+  <div class="container is-max-desktop">
+    <div class="columns is-vcentered is-variable is-1 has-text-centered">
+      <div class="column">
+        <div class="video-caption-panel-item">Unstable Policy</div>
+      </div>
+      <div class="column">
+        <div class="video-caption-panel-item">Stable Policy</div>
+      </div>
+      <div class="column">
+        <div class="video-caption-panel-item">Goal Image</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <hr class="thin-divider">
+    <!-- Abstract. -->
+    <!-- <hr class="thin-divider"> -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            World models have received significant attention from the robotics and computer vision community, both of whom have started scaling to networks comprising billions of parameters in the hope of unlocking new robot skills. In this paradigm, models are pre-trained on internet-scale data and then fine-tuned on robot data to learn policies. However, it is still unclear what makes a good world model for downstream policy learning, resulting in slow, costly iterations of model training and policy evaluation. 
+            </p>
+
+            <p>
+              In this work, we demonstrate that the expected signal-to-noise ratio (ESNR) of policy gradients provides a reliable training-time metric for downstream policy performance. This provides a handle on the world model's policy awareness, which denotes how well a policy can learn from a model. 
+            </p>
+            <p>
+              We show that ESNR can be used to understand (1) when world models are sufficiently pre-trained, (2) how architecture changes affect downstream performance and (3) what is the best policy learning method for a given world model. Crucially, ESNR can be computed on-the-fly with minimal overhead and without a trained policy. We validate our metric on traditional architectures and tasks as well as large pretrained world models, demonstrating the practical utility of ESNR for practitioners who wish to train or finetune such models for robot applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- <hr class="thin-divider"> -->
+
+    <!-- Teaser figure (inserted below abstract) - keep native aspect ratio and narrower width -->
+    <div class="columns is-centered has-text-centered teaser-wrapper">
+      <div class="column is-three-quarters">
+        <figure class="image teaser">
+          <img src="./static/images/teaser_figure.png" alt="Teaser figure" class="teaser-image" />
+          <!-- <figcaption class="has-text-centered">
+            <p class="is-size-6">
+              ESNR during world model training predicts downstream policy performance, providing a fast proxy for model quality assessment.
+            </p>
+          </figcaption> -->
+        </figure>
+      </div>
+    </div>
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+  <hr class="thin-divider">
+</section>
+
+<!-- ESNR Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Expected Signal-to-Noise Ratio (ESNR) as a Policy Performance Metric</h2>
+        <div class="content has-text-justified">
+          <p>
+            ESNR measures how clean and learnable the policy-gradient signal is by comparing signal to variance under action sampling. On a simple discontinuous task, higher-ESNR estimators (CEM &gt; FoG &gt; ZoG) climb faster—so we can gauge “policy awareness” during pretraining without training a policy or running rollouts.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+
+  <hr class="thin-divider">
+
+  <h3 class="title is-4 subsection">Selecting the policy-extraction method</h3>
+        <p>
+          ESNR tracks returns across ZoG/FoG/CEM; CEM scores highest ESNR and best returns, letting us pick the extractor without costly training.
+        </p>
+  <div class="figure-panel">
+  <div class="columns is-multiline results-panel">
+          <div class="column is-one-third">
+            <figure>
+              <img src="./static/images/esnr_vs_perf_scatter_log_barline_cropped.png" alt="ESNR vs perf barline" />
+            </figure>
+          </div>
+
+          <div class="column is-one-third">
+            <figure>
+              <img src="./static/images/esnr_vs_perf_scatter_log_cropped.png" alt="ESNR vs perf scatter" />
+            </figure>
+          </div>
+  </div>
+  <div class="legend">
+    <figure>
+      <img src="./static/images/pi_legend.png" alt="Policy-extraction legend" />
+    </figure>
+    <!-- <div class="panel-caption">Bar and scatter plots show the ESNR–performance relationship across policy-extraction methods. ESNR error bars are 95% bootstrap CIs; bar-chart performance is normalized and averaged over all tasks.</div> -->
+  </div>
   </div>
 
-  <div class="card">
-    <h2>Artifacts</h2>
-    <ul>
-      <li><a href="paper.pdf">PDF (anonymized)</a></li>
-      <li><a href="supplementary.zip">Supplementary (optional)</a></li>
-    </ul>
+        <hr class="thin-divider">
+
+  <h3 class="title is-4 subsection">Ranking architectures</h3>
+        <p>
+          ESNR mirrors performance gaps (regularized TD-MPC2 &gt; TD-MPC2 basic &gt; DreamerV3), surfacing architectural bottlenecks before any policy training.
+        </p>
+  <div class="figure-panel">
+  <div class="columns is-multiline results-panel">
+          <div class="column is-one-third">
+            <figure>
+              <img src="./static/images/esnr_vs_perf_across_archs_barline_cropped.png" alt="ESNR across archs barline" />
+            </figure>
+          </div>
+          <div class="column is-one-third">
+            <figure>
+              <img src="./static/images/esnr_vs_perf_across_archs_cropped.png" alt="ESNR across archs" />
+            </figure>
+          </div>
+  </div>
+  <div class="legend">
+    <figure>
+      <img src="./static/images/wm_legend.png" alt="Architecture legend" />
+    </figure>
+    <!-- <div class="panel-caption">The same relationship across world-model architectures. ESNR error bars are 95% bootstrap CIs; bar-chart performance is normalized and averaged over all tasks.</div> -->
+  </div>
   </div>
 
-  <div class="card">
-    <h2>BibTeX</h2>
-<pre>@inproceedings{anon2026paper,
-  title = {Paper Title},
-  author = {Anonymous},
-  booktitle = {Conference (Under Review)},
-  year = {2026}
-}</pre>
+        <hr class="thin-divider">
+
+        <div class="training-readiness-block">
+          <h3 class="title is-4 subsection">Training readiness</h3>
+          <p>
+            ESNR over checkpoints gives a stop/continue signal. Once ESNR stabilizes, policy extraction succeeds reliably.
+          </p>
+          <div class="figure-panel">
+            <div class="columns is-multiline results-panel">
+              <div class="column is-one-third">
+                <figure>
+                  <img src="./static/images/mean_snr_curve_with_perf.png" alt="Mean SNR curve" />
+                </figure>
+              </div>
+              <div class="column is-one-third">
+                <figure>
+                  <img src="./static/images/mean_snr_dreamerv3.png" alt="Mean SNR DreamerV3" />
+                </figure>
+              </div>
+            </div>
+            <!-- <div class="panel-caption">SNR vs. Policy Performance (TDMPC2, DreamerV3). ESNR shows 95% bootstrap CIs; lollipops mark policy-extraction returns (3 seeds) at the corresponding WM checkpoint. Returns are averaged over selected MetaWorld tasks.</div> -->
+          </div>
+        </div>
+
+        <hr class="thin-divider">
+
+  <h3 class="title is-4 subsection">Large models & wall-time</h3>
+        <p>
+          For ResNet/R3M/DINO-WM/V-JEPA2, ESNR predicts planning performance while taking seconds, versus hours for full policy evaluation—dramatically tightening the iteration loop.
+        </p>
+        <div class="figure-panel">
+        <div class="columns is-multiline results-panel">
+          <div class="column is-one-third">
+            <figure>
+              <img src="./static/images/bars_perf_1_over_cd.png" alt="Large models perf bars" />
+            </figure>
+          </div>
+        </div>
+        <!-- <div class="panel-caption">Performance 1/CD (lower CD is better) of different large pretrained models.</div> -->
+        </div>
+
+        <!-- Timing table for ESNR vs full eval (seconds vs hours) -->
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <table class="table is-fullwidth is-striped">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>ESNR time (s)</th>
+                  <th>Eval time (hrs)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ResNet</td>
+                  <td>0.003</td>
+                  <td>0.70</td>
+                </tr>
+                <tr>
+                  <td>R3M</td>
+                  <td>0.003</td>
+                  <td>2.21</td>
+                </tr>
+                <tr>
+                  <td>DinoWM</td>
+                  <td>0.027</td>
+                  <td>0.72</td>
+                </tr>
+                <tr>
+                  <td>V-JEPA2</td>
+                  <td>0.358</td>
+                  <td>4.58</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+<!-- 
+        <div class="content has-text-justified">
+          <p><strong>Left:</strong> Performance 1/CD (lower CD is better) of different large pretrained models.</p>
+          <p><strong>Right:</strong> Wall time to evaluate ESNR vs. evaluation.</p>
+          <p><strong>Bottom:</strong> Qualitative comparisons on <em>rope</em> where we overlay observations from a full episode to track changes to the environment.</p>
+        </div> -->
+
+      </div>
+    </div>
   </div>
-</main>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>Website based on <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>
